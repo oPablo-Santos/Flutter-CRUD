@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import "package:calculadorapablo2k/models/user.dart";
+import "package:calculadorapablo2k/provider/users.dart";
+import "package:provider/provider.dart";
 
 class UserTile extends StatelessWidget {
   final User user;
@@ -10,6 +12,7 @@ class UserTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Users users = Provider.of(context);
     // ignore: unnecessary_null_comparison
     final avatar = user.avatarUrl == null || user.avatarUrl.isEmpty
         ? CircleAvatar(
@@ -41,6 +44,24 @@ class UserTile extends StatelessWidget {
           color: Colors.grey,
         ),
       ),
+      trailing: SizedBox(
+          width: 100,
+          child: Row(
+            children: <Widget>[
+              IconButton(
+                onPressed: () {},
+                color: Colors.grey,
+                icon: Icon(Icons.edit),
+              ),
+              IconButton(
+                onPressed: () {
+                  users.remove(users.byIndex(0));
+                },
+                color: Colors.red,
+                icon: Icon(Icons.delete),
+              )
+            ],
+          )),
     );
   }
 }
