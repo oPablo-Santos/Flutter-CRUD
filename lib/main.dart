@@ -20,14 +20,15 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (ctx) => Users(),
       child: MaterialApp(
-        title: 'Testagens',
+        title: 'CRUD Users',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: Color.fromARGB(255, 255, 255, 255)),
           useMaterial3: true,
         ),
         routes: {
-          AppRoutes.HOME: (context) => UserList(),
-          AppRoutes.USER_FORM: (context) => UserForm()
+          AppRoutes.HOME: (_) => UserList(),
+          AppRoutes.USER_FORM: (_) => UserForm()
         },
       ),
     );

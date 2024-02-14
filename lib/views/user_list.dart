@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:calculadorapablo2k/models/user.dart';
+import 'package:calculadorapablo2k/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 import "package:calculadorapablo2k/provider/users.dart";
 import 'package:flutter/material.dart';
@@ -18,12 +18,7 @@ class UserList extends StatelessWidget {
           actions: <Widget>[
             IconButton(
                 onPressed: () {
-                  users.put(User(
-                    id: "9",
-                    name: "teste",
-                    email: "teste@teste.com",
-                    avatarUrl: "",
-                  ));
+                  Navigator.of(context).pushNamed(AppRoutes.USER_FORM);
                 },
                 icon: Icon(Icons.add))
           ],

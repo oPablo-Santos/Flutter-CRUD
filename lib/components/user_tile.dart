@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, unused_local_variable
 
+import "package:calculadorapablo2k/routes/app_routes.dart";
 import 'package:flutter/material.dart';
 import "package:calculadorapablo2k/models/user.dart";
 import "package:calculadorapablo2k/provider/users.dart";
@@ -49,13 +50,71 @@ class UserTile extends StatelessWidget {
           child: Row(
             children: <Widget>[
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(AppRoutes.USER_FORM, arguments: user);
+                },
                 color: Colors.grey,
                 icon: Icon(Icons.edit),
               ),
               IconButton(
                 onPressed: () {
-                  users.remove(users.byIndex(0));
+                  showDialog(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                            title: Row(
+                              children: [
+                                Icon(
+                                  Icons.dangerous,
+                                  color: Colors.red,
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  "Excluir usuário",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            content: Text(
+                              "Tem certeza?",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text(
+                                  "Não",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text(
+                                  "Sim",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Provider.of<Users>(context, listen: false)
+                                      .remove(user);
+                                  Navigator.of(context).pop();
+                                },
+                              )
+                            ],
+                          ));
                 },
                 color: Colors.red,
                 icon: Icon(Icons.delete),
